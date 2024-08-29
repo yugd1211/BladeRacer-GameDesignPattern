@@ -1,3 +1,6 @@
+using System;
+using EventBus;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum Direction
@@ -13,10 +16,20 @@ public class BikeController : MonoBehaviour
     
     public float CurrentSpeed { get; set; }
     public Direction CurrentTurnDirection { get; set; }
-
     private IBikeState _startState, _stopState, _turnState;
-
     private BikeStateContext _context;
+
+    private void OnEnable()
+    {
+        RaceEventBus.Subscribe(RaceEventType.START, StartBike);
+        RaceEventBus.Subscribe(RaceEventType.STOP, StopBike);
+    }
+
+    private void OnDisable()
+    {
+        RaceEventBus.Unsubscribe(RaceEventType.START, StartBike);
+        RaceEventBus.Unsubscribe(RaceEventType.STOP, StopBike);
+    }
 
     private void Start()
     {
