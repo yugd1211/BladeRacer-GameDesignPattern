@@ -11,6 +11,8 @@ public enum Direction
 
 public class BikeController : MonoBehaviour
 {
+    private bool _isTurboOn;
+    private float _distance = 1.0f;
     public float maxSpeed = 2.0f;
     public float turnDistance = 2.0f;
     
@@ -42,11 +44,23 @@ public class BikeController : MonoBehaviour
         _context.Transition(_stopState);
     }
 
+    public void ToggleTurbo()
+    {
+        _isTurboOn = !_isTurboOn;
+        Debug.Log("Turbo Active: " + _isTurboOn);
+    }
+    
     public void StartBike() => _context.Transition(_startState);
     public void StopBike() => _context.Transition(_stopState);
     public void Turn(Direction direction)
     {
-        CurrentTurnDirection = direction;
-        _context.Transition(_turnState);
+        // CurrentTurnDirection = direction;
+        // _context.Transition(_turnState);
+        transform.Translate(direction == Direction.Left ? Vector3.left : Vector3.right * _distance);
+    }
+
+    public void ResetPosition()
+    {
+        transform.position = Vector3.zero;
     }
 }

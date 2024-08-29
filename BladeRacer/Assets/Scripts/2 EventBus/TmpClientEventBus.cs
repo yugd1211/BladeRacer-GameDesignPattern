@@ -1,13 +1,11 @@
-using System;
 using EventBus;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class TmpClientEventBus : MonoBehaviour
 {
     private bool _isButtonEnabled;
 
-    private void Start()
+    private void Awake()
     {
         gameObject.AddComponent<HUDController>();
         gameObject.AddComponent<CountdownTimer>();
