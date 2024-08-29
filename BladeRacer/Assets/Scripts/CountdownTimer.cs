@@ -32,7 +32,7 @@ public class CountdownTimer : MonoBehaviour
             yield return waitTime;
             _currentTime--;
         }
-        RaceEventBus.Publish(RaceEventType.COUNTDOWN);
+        RaceEventBus.Publish(RaceEventType.START);
     }
 
     private void OnGUI()
